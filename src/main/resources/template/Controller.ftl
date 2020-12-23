@@ -21,7 +21,7 @@ import java.util.Map;
  * @date ${common.date}
  */
 <#if common.useSwagger>
-@Api(tags = "字典管理")
+@Api(tags = "${table.tableComment}")
 </#if>
 @RestController
 @RequestMapping("${common.controllerMappingPath}")
@@ -34,7 +34,7 @@ public class ${common.className}Controller extends BaseRestController {
 <#if common.useSwagger>
     @ApiOperation(value = "查询详情")
 </#if>
-    public ${common.className} get(@PathVariable("id") Integer id) {
+    public ${common.className} get(@PathVariable("id") ${table.tableIdType} id) {
         return ${common.beanName}Service.get(id);
     }
 
@@ -52,7 +52,7 @@ public class ${common.className}Controller extends BaseRestController {
 <#if common.useSwagger>
     @ApiOperation(value = "修改")
 </#if>
-    public ${common.className} update(@PathVariable("id") Integer id, @RequestBody ${common.className}SaveVo ${common.beanName}SaveVo) {
+    public ${common.className} update(@PathVariable("id") ${table.tableIdType} id, @RequestBody ${common.className}SaveVo ${common.beanName}SaveVo) {
         ${common.className} ${common.beanName} = new ${common.className}();
         BeanUtils.copyProperties(${common.beanName}SaveVo, ${common.beanName});
         ${common.beanName}.setId(id);
@@ -63,7 +63,7 @@ public class ${common.className}Controller extends BaseRestController {
 <#if common.useSwagger>
     @ApiOperation(value = "删除")
 </#if>
-    public int del(@RequestBody Integer[] ids) {
+    public int del(@RequestBody ${table.tableIdType}[] ids) {
         return ${common.beanName}Service.del(ids);
     }
 

@@ -161,7 +161,9 @@ public class CodeGenerator {
     }
 
     public static String tableNameToBeanName(String tableName) {
-        return tableName.replaceFirst(GenerationConfig.tablePrefix, "");
+        String temp = tableName.replaceFirst(GenerationConfig.tablePrefix, "");
+        temp = temp.endsWith(GenerationConfig.tableSuffix) ? temp.substring(0, temp.length() - GenerationConfig.tableSuffix.length()) : temp;
+        return temp;
     }
 
     public static String tableNameToMapping(String tableName) {

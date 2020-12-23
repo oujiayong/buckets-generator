@@ -53,7 +53,7 @@ public class SqlUtil {
             case "datetime":
             case "time":
             case "timestamp":
-                return "Date";
+                return "java.util.Date";
             default:
                 System.out.println("-----------------》转化失败：未发现的类型"+sqlType);
                 break;
