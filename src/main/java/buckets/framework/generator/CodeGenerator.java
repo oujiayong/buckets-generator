@@ -26,20 +26,19 @@ public class CodeGenerator {
 
     public static void main(String[] args) {
         try {
-            new CodeGenerator().gen();
+            gen();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TemplateException e) {
             e.printStackTrace();
         }
 
-//        System.out.println(getTableInfo("dictionary"));
     }
 
-    public void gen() throws IOException, TemplateException {
+    public static void gen() throws IOException, TemplateException {
 
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_22);
-        cfg.setClassForTemplateLoading(this.getClass(), "/template");
+        cfg.setClassForTemplateLoading(CodeGenerator.class, "/template");
         cfg.setDefaultEncoding("UTF-8");
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 
@@ -161,7 +160,7 @@ public class CodeGenerator {
     }
 
     public static String tableNameToBeanName(String tableName) {
-        String temp = tableName.replaceFirst(GenerationConfig.tablePrefix, "");
+        String temp = tableName.startsWith(GenerationConfig.tablePrefix) ? tableName.substring(GenerationConfig.tablePrefix.length()) : tableName;
         temp = temp.endsWith(GenerationConfig.tableSuffix) ? temp.substring(0, temp.length() - GenerationConfig.tableSuffix.length()) : temp;
         return temp;
     }

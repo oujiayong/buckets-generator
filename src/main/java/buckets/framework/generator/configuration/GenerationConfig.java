@@ -34,7 +34,7 @@ public class GenerationConfig {
             tablePrefix = properties.getProperty("generator.table.prefix");
             tableSuffix = properties.getProperty("generator.table.suffix");
             useLombok = "true".equals(properties.getProperty("generator.useLombok"));
-            useSwagger = "false".equals(properties.getProperty("generator.useSwagger")) ? false : true;
+            useSwagger = !"false".equals(properties.getProperty("generator.useSwagger"));
             baseDir = System.getProperty("user.dir");
         } catch (IOException e) {
             e.printStackTrace();
